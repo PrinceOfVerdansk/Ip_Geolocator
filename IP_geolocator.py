@@ -74,3 +74,23 @@ def display_results(data):
     
     print("\n" + "=" * 50 + "\n")
 
+def get_ip_from_user():
+    """Prompt user to enter an IP address or press Enter to use their own IP."""
+    print("\nEnter an IP address to look up, or press Enter to use your own IP:")
+    print("(Example: 8.8.8.8 or 192.168.1.1)")
+    
+    while True:
+        user_input = input("\nIP address: ").strip()
+        
+        # If user pressed Enter, use their own IP
+        if not user_input:
+            return None  # Will trigger auto-detection
+            
+        # Basic IP validation (simple check)
+        parts = user_input.split('.')
+        if len(parts) == 4 and all(part.isdigit() and 0 <= int(part) <= 255 for part in parts):
+            return user_input
+        else:
+            print(" Invalid IP format. Please enter a valid IPv4 address (e.g., 8.8.8.8) or press Enter for your own IP.")
+            continue
+
