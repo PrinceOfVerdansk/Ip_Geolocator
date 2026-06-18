@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+
 """
 IP Geolocation Lookup Tool
 """
@@ -94,3 +94,40 @@ def get_ip_from_user():
             print(" Invalid IP format. Please enter a valid IPv4 address (e.g., 8.8.8.8) or press Enter for your own IP.")
             continue
 
+def main():
+    """Main program entry point."""
+    print("\n IP Geolocation Lookup Tool")
+    print("-" * 30)
+    
+    # Check if IP was provided as command-line argument
+    if len(sys.argv) > 1:
+        ip_address = sys.argv[1]
+        print(f" Looking up: {ip_address}")
+    else:
+        # No IP provided, ask user interactively
+        ip_address = get_ip_from_user()
+        
+        # If user didn't enter an IP, get their own
+        if ip_address is None:
+            print("\n No IP entered. Detecting your public IP...")
+            ip_address = get_public_ip()
+            if not ip_address:
+                print(" Could not detect your IP address.")
+                print("💡 Usage: python ip_geolocator.py [IP_ADDRESS]")
+                sys.exit(1)
+            print(f"🌐 Your IP: {ip_address}")
+        else:
+            print(f" Looking up: {ip_address}")
+    
+    # Perform the lookup
+    data = lookup_ip(ip_address)
+    
+    if data:
+        display_results(data)
+    else:
+        print(" Failed to retrieve geolocation data.")
+        print("💡 Usage: python ip_geolocator.py [IP_ADDRESS]")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()
