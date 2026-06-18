@@ -51,3 +51,26 @@ def lookup_ip(ip_address):
         print(f" An error occurred: {e}")
         return None
 
+
+def display_results(data):
+    """Pretty print the geolocation data."""
+    print("\n" + "=" * 50)
+    print("IP GEOLOCATION RESULTS")
+    print("=" * 50)
+    
+    # Core information
+    print(f"\n IP Address:     {data.get('query', 'N/A')}")
+    print(f"Country:        {data.get('country', 'N/A')} ({data.get('countryCode', 'N/A')})")
+    print(f" City:           {data.get('city', 'N/A')}")
+    print(f"Region:         {data.get('regionName', 'N/A')} ({data.get('region', 'N/A')})")
+    print(f"Zip Code:       {data.get('zip', 'N/A')}")
+    print(f" Timezone:       {data.get('timezone', 'N/A')}")
+    print(f" Coordinates:    {data.get('lat', 'N/A')}, {data.get('lon', 'N/A')}")
+    
+    # ISP information
+    print(f"\n ISP:            {data.get('isp', 'N/A')}")
+    print(f" Organization:   {data.get('org', 'N/A')}")
+    print(f"AS:             {data.get('as', 'N/A')}")
+    
+    print("\n" + "=" * 50 + "\n")
+
